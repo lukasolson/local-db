@@ -1,6 +1,6 @@
 # Local DB
 
-Local DB is a wrapper around IndexedDB and drastically simplifies the API to `getItem`, `setItem`, and `removeItem`, making it similar to the `localStorage` API.
+Local DB is a wrapper around IndexedDB that drastically simplifies the API to `getItem`, `setItem`, and `removeItem`, making it similar to the `localStorage` API.
 
 Its only dependency is [q.js](https://github.com/kriskowal/q).
 
