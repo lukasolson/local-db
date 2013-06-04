@@ -1,8 +1,51 @@
-# Local DB
+# LocalDB
 
-Local DB is a wrapper around IndexedDB that drastically simplifies the API to `getItem`, `setItem`, and `removeItem`, making it similar to the `localStorage` API.
+LocalDB is a wrapper around IndexedDB that radically simplifies the API to just three methods: `getItem`, `setItem`, and `removeItem`.
 
-Its only dependency is [q.js](https://github.com/kriskowal/q).
+In other words, LocalDB makes IndexedDB as easy to use as `localStorage`.
+
+LocalDB has one dependency: [q.js](https://github.com/kriskowal/q).
+
+## Usage
+```html
+<html>
+	<head>
+		<script type="text/javascript" src=""></script>
+		<script type="text/javascript" src="local-db.js"></script>
+		<script type="text/javascript">
+			localDB.initialize().then(function () {
+				console.log("successfully initialized");
+				localDB.setItem("foo", "bar").then(function () {
+					console.log("successfully set item");
+					localDB.getItem("foo").then(function (value) {
+						console.log("successfully got item", value);
+						localDB.removeItem("foo").then(function () {
+							console.log("successfully removed item");
+						});
+					});
+				});
+			});
+			
+			// This is essentially equivalent to the above, with less nesting
+			localDB.initialize().then(function () {
+				console.log("successfully initialized");
+				return localDB.setItem("foo", "bar");
+			}).then(function () {
+				console.log("successfully set item");
+				return localDB.getItem("foo");
+			}).then(function (value) {
+				console.log("successfully got item", value);
+				return localDB.removeItem("foo");
+			}).then(function () {
+				console.log("successfully removed item");
+			});
+		</script>
+	</head>
+	<body></body>
+</html>
+```
+
+Check out the `example` directory for more examples.
 
 ## API
 
@@ -17,20 +60,3 @@ Retrieve the value associated with the given key. The return value is not the re
 
 #### `removeItem(key)`
 Remove the value associated with the given key from the object store. Returns a `q.promise` which can be used for success/error handling.
-
-### Example
-```javascript
-localDB.initialize().then(function () {
-	return localDB.setItem("foo", "bar");
-}).then(function () {
-	console.log("set item");
-	return localDB.getItem("foo");
-}).then(function (value) {
-	console.log("got item", value);
-	return localDB.removeItem("foo");
-}).then(function () {
-	console.log("removed item");
-});
-```
-
-Check out the `example` directory for more examples.
