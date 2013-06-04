@@ -3,8 +3,10 @@ var localDB = {
 	OBJECT_STORE_KEY: "objectStore",
 	
 	initialize: function initialize() {
+		if (this._initialized) return this._initialized.promise;
+		
+		this._initialized = Q.defer();
 		var self = this,
-			deferred = Q.defer(),
 			request = indexedDB.open("localDB");
 
 		request.onupgradeneeded = function () {
@@ -13,14 +15,14 @@ var localDB = {
 		
 		request.onsuccess = function () {
 			self._db = request.result;
-			deferred.resolve();
+			self._initialized.resolve();
 		};
 		
 		request.onerror = function (e) {
-			deferred.reject(e);
+			self._initialized.reject(e);
 		};
 		
-		return deferred.promise;
+		return this._initialized.promise;
 	},
 	
 	getItem: function getItem(key) {
