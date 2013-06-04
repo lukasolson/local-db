@@ -21,22 +21,15 @@ Remove the value associated with the given key from the object store. Returns a 
 ### Example
 ```javascript
 localDB.initialize().then(function () {
-	localDB.setItem("foo", "bar").then(function () {
-		localDB.getItem("foo").then(function (value) {
-			console.log("Got value", value);
-			localDB.removeItem("foo").then(function () {
-				console.log("Removed value");
-			}, function (e) {
-				console.log("Error removing item", e);
-			});
-		}, function (e) {
-			console.log("Error getting item", e);
-		});
-	}, function (e) {
-		console.log("Error setting item", e);
-	});
-}, function (e) {
-	console.log("Error initializing localDB", e);
+	return localDB.setItem("foo", "bar");
+}).then(function () {
+	console.log("set item");
+	return localDB.getItem("foo");
+}).then(function (value) {
+	console.log("got item", value);
+	return localDB.removeItem("foo");
+}).then(function () {
+	console.log("removed item");
 });
 ```
 
