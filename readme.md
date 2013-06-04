@@ -45,7 +45,7 @@ LocalDB has one dependency: [q.js](https://github.com/kriskowal/q).
 </html>
 ```
 
-Check out the [https://github.com/lukasolson/Local-DB/tree/master/example](example) directory for more examples.
+Check out the [example](https://github.com/lukasolson/Local-DB/tree/master/example) directory for more examples.
 
 ## API
 
