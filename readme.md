@@ -10,7 +10,7 @@ LocalDB has one dependency: [q.js](https://github.com/kriskowal/q).
 ```html
 <html>
 	<head>
-		<script type="text/javascript" src=""></script>
+		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/q.js/0.9.2/q.min.js"></script>
 		<script type="text/javascript" src="local-db.js"></script>
 		<script type="text/javascript">
 			localDB.initialize().then(function () {
